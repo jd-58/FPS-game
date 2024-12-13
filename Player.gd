@@ -11,6 +11,10 @@ const BOB_FREQ = 2.0
 const BOB_AMP = 0.08
 var t_bob = 0.0
 
+# FOV variables
+var base_fov = 75
+const FOV_CHANGE = 1.5
+
 
 @onready var head = $Head
 @onready var camera = $Head/Camera3D
@@ -61,6 +65,12 @@ func _physics_process(delta: float) -> void:
 	# Head bob
 	t_bob += delta * velocity.length() * float(is_on_floor())
 	camera.transform.origin = _headbob(t_bob)
+	
+	# FOV
+	var velocity_clamped = clamp(velocity.length(), 0.5, SPRINT_SPEED * 2)
+	var target_fov = base_fov + FOV_CHANGE * velocity_clamped
+	camera.fov = lerp(camera.fov, target_fov, delta * 8.0)
+
 
 	move_and_slide()
 	
