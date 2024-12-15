@@ -77,6 +77,10 @@ func _unhandled_input(event):
 		tilt_input = -event.relative.y * MOUSE_SENSITIVITY
 
 func _physics_process(delta: float) -> void:
+	
+	# Add movement speed to debug panel
+	Global.debug.add_property("MovementSpeed",speed,1)
+	
 	# Add the gravity.
 	if not is_on_floor():
 		velocity += get_gravity() * delta
