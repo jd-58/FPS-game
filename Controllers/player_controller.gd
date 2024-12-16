@@ -67,6 +67,9 @@ func _update_camera(delta):
 		
 func _ready():
 	
+	# Setting a global variable for the player controller
+	Global.player = self
+	
 	# Set default speed
 	speed = SPEED_DEFAULT
 	
