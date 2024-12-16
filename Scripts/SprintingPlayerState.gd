@@ -5,7 +5,7 @@ class_name SprintingPlayerState extends PlayerMovementState
 @export var ACCELERATION : float = 0.1
 @export var DECELERATION : float = 0.25
 
-func enter() -> void:
+func enter(previous_state) -> void:
 	ANIMATION.play("Sprinting",0.5,1.0)
 	
 func exit() -> void:
@@ -21,6 +21,9 @@ func update(delta):
 	
 	if Input.is_action_just_released("Sprint"):
 		transition.emit("WalkingPlayerState")
+		
+	if Input.is_action_just_pressed("Crouch") and PLAYER.velocity.length() > 6:
+		transition.emit("SlidingPlayerState")
 
 
 func set_animation_speed(spd) -> void:

@@ -3,11 +3,11 @@ class_name WalkingPlayerState
 extends PlayerMovementState
 
 @export var SPEED : float = 5.0
-@export var ACCELERATION : float = 0.05
-@export var DECELERATION : float = 0.05
+@export var ACCELERATION : float = 0.04
+@export var DECELERATION : float = 0.04
 @export var TOP_ANIM_SPEED : float = 2.2
 
-func enter() -> void:
+func enter(previous_state) -> void:
 	ANIMATION.play("Walking",-1.0,1.0)
 	
 func exit() -> void:
