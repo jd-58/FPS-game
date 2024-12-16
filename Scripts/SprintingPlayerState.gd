@@ -7,6 +7,9 @@ class_name SprintingPlayerState extends PlayerMovementState
 
 func enter() -> void:
 	ANIMATION.play("Sprinting",0.5,1.0)
+	
+func exit() -> void:
+	ANIMATION.speed_scale = 1.0
 
 
 func update(delta):
