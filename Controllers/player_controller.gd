@@ -21,12 +21,9 @@ var is_crouching : bool = false
 @export_range(5, 10, 0.1) var CROUCH_SPEED : float = 7.0
 @export var CROUCH_SHAPECAST : Node3D
 @export var TOGGLE_CROUCH : bool = true
-#bob variables
-@export var BOB_FREQ : float = 2.4
-@export var BOB_AMP : float = 0.08
-var t_bob = 0.0
+@export var ACCELERATION : float = 0.1
+@export var DECELERATION: float = 0.25
 
-@onready var camera = $CameraController/Camera3D
 
 
 
@@ -105,15 +102,14 @@ func _physics_process(delta: float) -> void:
 	var input_dir := Input.get_vector("Left", "Right", "Forward", "Backward")
 	var direction := (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
 	if direction:
-		velocity.x = direction.x * speed
-		velocity.z = direction.z * speed
+		# Using linear interpolation to smoothly accel and decel
+		velocity.x = lerp(velocity.x, direction.x * speed, ACCELERATION)
+		velocity.z = lerp(velocity.z, direction.z * speed, ACCELERATION)
 	else:
-		velocity.x = move_toward(velocity.x, 0, speed)
-		velocity.z = move_toward(velocity.z, 0, speed)
+		velocity.x = move_toward(velocity.x, 0, DECELERATION)
+		velocity.z = move_toward(velocity.z, 0, DECELERATION)
 		
-	# Head bob
-	t_bob += delta * velocity.length() * float(is_on_floor())
-	camera.transform.origin = _headbob(t_bob)
+
 
 	move_and_slide()
 	
@@ -155,8 +151,3 @@ func set_movement_speed(state: String):
 			speed = SPEED_CROUCH
 			
 			
-func _headbob(time) -> Vector3:
-	var pos = Vector3.ZERO
-	pos.y = sin(time * BOB_FREQ) * BOB_AMP
-	pos.x = cos(time * BOB_FREQ / 2) * BOB_AMP
-	return pos
