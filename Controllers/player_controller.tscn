@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://b2udckml7q2tb"]
+[gd_scene load_steps=17 format=3 uid="uid://b2udckml7q2tb"]
 
 [ext_resource type="Script" path="res://Controllers/player_controller.gd" id="1_dyrp6"]
 [ext_resource type="Script" path="res://Scripts/reticle.gd" id="2_3ogwa"]
@@ -7,6 +7,7 @@
 [ext_resource type="Script" path="res://Scripts/state_machine.gd" id="5_i0kuc"]
 [ext_resource type="Script" path="res://Scripts/IdlePlayerState.gd" id="6_8djid"]
 [ext_resource type="Script" path="res://Scripts/WalkingPlayerState.gd" id="7_og5xb"]
+[ext_resource type="Script" path="res://Scripts/SprintingPlayerState.gd" id="8_xlye1"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_umppa"]
 
@@ -122,6 +123,39 @@ tracks/5/keys = {
 "points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
 "times": PackedFloat32Array(0)
 }
+tracks/6/type = "bezier"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("CameraController/Camera3D:position:x")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/7/type = "bezier"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("CameraController/Camera3D:position:y")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/8/type = "bezier"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("CameraController/Camera3D:position:z")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
 
 [sub_resource type="Animation" id="Animation_uflpg"]
 resource_name = "Walking"
@@ -161,10 +195,49 @@ tracks/2/keys = {
 "times": PackedFloat32Array(0, 0.5, 1, 1.5, 2)
 }
 
+[sub_resource type="Animation" id="Animation_6vq26"]
+resource_name = "Sprinting"
+length = 1.2
+loop_mode = 1
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CameraController/Camera3D:position:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0, 0, 0, 0, 0, 0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.2, 0.020408, 0.065, -0.2, -0.0303266, 0.1, 0.00937584, 0.0779852, -0.0333333, -0.00354599, 0.133333, -0.00137497, -0.065, -0.1, 0.0309245, 0.2, -0.00946542, -0.075, -0.266667, 0.0130813, 0.0666667, 0.00122207, 0, -0.1, -0.0153414, 0.25, 0),
+"times": PackedFloat32Array(0, 0.3, 0.5, 0.8, 1, 1.2)
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CameraController/Camera3D:position:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(0, 0, 0, 0, 0, 0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.166667, 0.0126737, 0.066, -0.233333, -0.0189518, 0.2, -0.01878, -0.036, -0.233333, 0.0397364, 0.25, 0, 0.066, -0.233333, -0.00898325, 0.2, -0.0167175, -0.036, -0.133333, 0.00536197, 0.166667, 0.00175266, 0, -0.133333, -0.00227913, 0.25, 0),
+"times": PackedFloat32Array(0, 0.3, 0.5, 0.8, 1, 1.2)
+}
+tracks/2/type = "bezier"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("CameraController/Camera3D:position:z")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"handle_modes": PackedInt32Array(0, 0, 0, 0, 0, 0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 0.3, 0.5, 0.8, 1, 1.2)
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_wo6ts"]
 _data = {
 "Crouch": SubResource("Animation_e6r1h"),
 "RESET": SubResource("Animation_ragnj"),
+"Sprinting": SubResource("Animation_6vq26"),
 "Walking": SubResource("Animation_uflpg")
 }
 
@@ -270,6 +343,10 @@ ANIMATION = NodePath("../../AnimationPlayer")
 
 [node name="WalkingPlayerState" type="Node" parent="PlayerStateMachine" node_paths=PackedStringArray("ANIMATION")]
 script = ExtResource("7_og5xb")
+ANIMATION = NodePath("../../AnimationPlayer")
+
+[node name="SprintingPlayerState" type="Node" parent="PlayerStateMachine" node_paths=PackedStringArray("ANIMATION")]
+script = ExtResource("8_xlye1")
 ANIMATION = NodePath("../../AnimationPlayer")
 
 [connection signal="animation_started" from="AnimationPlayer" to="." method="_on_animation_player_animation_started"]

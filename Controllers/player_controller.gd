@@ -12,6 +12,7 @@ var is_crouching : bool = false
 
 @export var SPEED_DEFAULT : float = 5.0
 @export var SPEED_CROUCH : float = 2.0
+@export var SPEED_SPRINTING: float = 7.0
 @export var JUMP_VELOCITY : float = 4.5
 @export var TILT_LOWER_LIMIT := deg_to_rad(-70)
 @export var TILT_UPPER_LIMIT := deg_to_rad(90)
@@ -23,6 +24,7 @@ var is_crouching : bool = false
 @export var TOGGLE_CROUCH : bool = true
 @export var ACCELERATION : float = 0.1
 @export var DECELERATION: float = 0.25
+
 
 
 
