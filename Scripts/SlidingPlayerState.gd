@@ -21,6 +21,7 @@ func update(delta):
 	PLAYER.update_velocity()
 	
 	if Input.is_action_just_pressed('Jump') and PLAYER.is_on_floor():
+		PLAYER.update_input(SPEED,ACCELERATION,DECELERATION)
 		transition.emit("JumpingPlayerState")
 	
 func set_tilt(player_rotation) -> void:

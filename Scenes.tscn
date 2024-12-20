@@ -54,7 +54,7 @@ use_collision = true
 size = Vector3(0.324771, 3.49597, 52.1987)
 
 [node name="CSGBox3D6" type="CSGBox3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.33542, 0.641536, -19.1148)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.33542, 0.641536, -18.225)
 use_collision = true
 size = Vector3(3.67084, 1.14893, 1.93799)
 
@@ -70,3 +70,23 @@ size = Vector3(4, 0.5, 6)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.825, 1.5, -10.035)
 use_collision = true
 size = Vector3(4, 0.6, 6)
+
+[node name="CSGBox3D9" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.33542, 0.985503, -14.4791)
+use_collision = true
+size = Vector3(3.67084, 1.14893, 1.93799)
+
+[node name="CSGBox3D10" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.33542, 1.60225, -11.5327)
+use_collision = true
+size = Vector3(3.67084, 1.14893, 1.93799)
+
+[node name="CSGBox3D11" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.131636, 2.19352, -4.93269)
+use_collision = true
+size = Vector3(6.60495, 1.14893, 7.05237)
+
+[node name="CSGPolygon3D" type="CSGPolygon3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.398, 0.640241, -1.50308)
+use_collision = true
+polygon = PackedVector2Array(0, 0, -0.253201, 2.13669, 4.78546, -0.806267, 0.799578, -0.101061)
