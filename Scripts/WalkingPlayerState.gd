@@ -29,6 +29,9 @@ func update(delta):
 	if Input.is_action_just_pressed('Crouch') and PLAYER.is_on_floor():
 		transition.emit("CrouchingPlayerState")
 		
+	if Input.is_action_just_pressed('Jump') and PLAYER.is_on_floor():
+		transition.emit("JumpingPlayerState")
+		
 func set_animation_speed(spd):
 	var alpha = remap(spd, 0.0, SPEED, 0.0, 1.0)
 	ANIMATION.speed_scale = lerp(0.0, TOP_ANIM_SPEED, alpha)

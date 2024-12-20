@@ -20,4 +20,7 @@ func update(delta):
 	
 	if Global.player.velocity.length() > 0.0 and Global.player.is_on_floor():
 		transition.emit("WalkingPlayerState")
+		
+	if Input.is_action_just_pressed('Jump') and PLAYER.is_on_floor():
+		transition.emit("JumpingPlayerState")
 	

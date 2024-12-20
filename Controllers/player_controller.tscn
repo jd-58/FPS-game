@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://b2udckml7q2tb"]
+[gd_scene load_steps=21 format=3 uid="uid://b2udckml7q2tb"]
 
 [ext_resource type="Script" path="res://Controllers/player_controller.gd" id="1_dyrp6"]
 [ext_resource type="Script" path="res://Scripts/reticle.gd" id="2_3ogwa"]
@@ -10,6 +10,7 @@
 [ext_resource type="Script" path="res://Scripts/SprintingPlayerState.gd" id="8_xlye1"]
 [ext_resource type="Script" path="res://Scripts/CrouchingPlayerState.gd" id="9_rod4l"]
 [ext_resource type="Script" path="res://Scripts/SlidingPlayerState.gd" id="10_6ehdn"]
+[ext_resource type="Script" path="res://Scripts/JumpingPlayerState.gd" id="11_8x0jj"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_umppa"]
 
@@ -545,16 +546,9 @@ CURRENT_STATE = NodePath("IdlePlayerState")
 
 [node name="IdlePlayerState" type="Node" parent="PlayerStateMachine"]
 script = ExtResource("6_8djid")
-SPEED = null
-ACCELERATION = null
-DECELERATION = null
 
 [node name="WalkingPlayerState" type="Node" parent="PlayerStateMachine"]
 script = ExtResource("7_og5xb")
-SPEED = null
-ACCELERATION = null
-DECELERATION = null
-TOP_ANIM_SPEED = null
 
 [node name="SprintingPlayerState" type="Node" parent="PlayerStateMachine"]
 script = ExtResource("8_xlye1")
@@ -565,5 +559,10 @@ script = ExtResource("9_rod4l")
 [node name="SlidingPlayerState" type="Node" parent="PlayerStateMachine"]
 script = ExtResource("10_6ehdn")
 SPEED = null
+
+[node name="JumpingPlayerState" type="Node" parent="PlayerStateMachine"]
+script = ExtResource("11_8x0jj")
+
+[node name="SlideCheck" type="RayCast3D" parent="."]
 
 [connection signal="animation_started" from="AnimationPlayer" to="." method="_on_animation_player_animation_started"]

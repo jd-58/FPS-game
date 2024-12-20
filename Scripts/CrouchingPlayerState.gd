@@ -29,6 +29,9 @@ func update(delta):
 		RELEASED = true
 		uncrouch()
 		
+	if Input.is_action_just_pressed('Jump') and PLAYER.is_on_floor():
+		transition.emit("JumpingPlayerState")
+		
 func uncrouch():
 	if CROUCH_SHAPECAST.is_colliding() == false:
 		ANIMATION.play("Crouching", -1.0, -CROUCH_SPEED, true)

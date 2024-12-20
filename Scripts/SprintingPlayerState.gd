@@ -24,6 +24,9 @@ func update(delta):
 		
 	if Input.is_action_just_pressed("Crouch") and PLAYER.velocity.length() > 6:
 		transition.emit("SlidingPlayerState")
+		
+	if Input.is_action_just_pressed('Jump') and PLAYER.is_on_floor():
+		transition.emit("JumpingPlayerState")
 
 
 func set_animation_speed(spd) -> void:
