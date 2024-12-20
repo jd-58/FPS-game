@@ -8,7 +8,7 @@ class_name JumpingPlayerState extends PlayerMovementState
 
 func enter(previous_state) -> void:
 	PLAYER.velocity.y += JUMP_VELOCITY
-	ANIMATION.pause()
+	ANIMATION.play("JumpStart") #used to be animation.pause()
 
 
 func update(delta):
@@ -21,6 +21,7 @@ func update(delta):
 			PLAYER.velocity.y = PLAYER.velocity.y / 2
 	
 	if PLAYER.is_on_floor():
+		ANIMATION.play("JumpEnd")
 		transition.emit("IdlePlayerState")
 		
 	
